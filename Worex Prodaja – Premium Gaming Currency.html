@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)https://worexprodaja.netlify.app/ -->
+<html lang="bs"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worex Prodaja – Premium Gaming Currency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Worex Prodaja – Premium Gaming Currency_files/css2" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary:#0A0B10;--bg-card:#161B22;--bg-modal:#0F1318;
+      --accent:#00D4FF;--accent-alt:#007BFF;
+      --text-primary:#FFFFFF;--text-secondary:#A0A0A0;
+      --border-subtle:rgba(255,255,255,0.08);
+      --glass-bg:rgba(22,27,34,0.65);--glass-blur:blur(18px);
+      --glow:0 0 24px rgba(0,212,255,0.35);--glow-strong:0 0 40px rgba(0,212,255,0.55);
+      --radius:14px;--transition:0.3s cubic-bezier(0.25,0.8,0.25,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background-color:var(--bg-primary);color:var(--text-primary);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+    body::after{content:'';position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse at center,rgba(0,212,255,0.07) 0%,transparent 70%);pointer-events:none;z-index:0}
+    section,header,footer{position:relative;z-index:1}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--bg-primary)}
+    ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+    /* HEADER */
+    header{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-bottom:1px solid var(--border-subtle)}
+    .logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;letter-spacing:0.15em;text-transform:uppercase}
+    .logo span{color:var(--accent);text-shadow:0 0 12px rgba(0,212,255,0.6)}
+    nav{display:flex;gap:2rem;position:absolute;left:50%;transform:translateX(-50%)}
+    nav a{font-size:0.85rem;font-weight:500;letter-spacing:0.05em;color:var(--text-secondary);transition:color var(--transition);text-transform:uppercase}
+    nav a:hover{color:var(--text-primary)}
+    .status-btn{display:flex;align-items:center;gap:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:50px;padding:6px 14px;font-size:0.78rem;font-weight:600;color:var(--accent);letter-spacing:0.04em;transition:var(--transition)}
+    .status-btn:hover{background:rgba(0,212,255,0.15);box-shadow:0 0 16px rgba(0,212,255,0.2)}
+    .status-dot{width:8px;height:8px;background:#00FF88;border-radius:50%;animation:pulse-green 1.8s ease-in-out infinite}
+    @keyframes pulse-green{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 6px #00FF88}50%{opacity:0.6;transform:scale(1.3);box-shadow:0 0 14px #00FF88}}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text-secondary);border-radius:2px;transition:var(--transition)}
+
+    /* HERO */
+    .hero{min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 5% 60px;position:relative}
+    .hero-title{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2.8rem,7vw,5.5rem);letter-spacing:-0.02em;line-height:1.05;background:linear-gradient(135deg,#FFFFFF 0%,#00D4FF 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1.2rem}
+    .hero-subtitle{max-width:560px;color:var(--text-secondary);font-size:1.05rem;margin-bottom:2.4rem;line-height:1.7}
+    .trust-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.18);border-radius:50px;padding:8px 20px;font-size:0.82rem;font-weight:600;color:var(--text-secondary);margin-bottom:2.8rem}
+    .trust-badge strong{color:var(--text-primary);font-size:0.88rem}
+    .trust-stars{color:#FFD700;letter-spacing:1px}
+    .cta-btn{position:relative;display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--accent-alt),var(--accent));color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.06em;text-transform:uppercase;padding:18px 44px;border-radius:8px;border:none;cursor:pointer;overflow:hidden;box-shadow:0 4px 30px rgba(0,212,255,0.4);transition:transform var(--transition),box-shadow var(--transition)}
+    .cta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(0,212,255,0.6)}
+    .cta-btn::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.35),transparent);animation:shimmer 5s ease-in-out infinite}
+    @keyframes shimmer{0%{left:-100%}20%{left:120%}100%{left:120%}}
+    .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--text-secondary);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;animation:bounce 2s infinite}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+    /* SECTION HEADERS */
+    .section-label{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem}
+    .section-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-0.01em;margin-bottom:0.8rem}
+    .section-desc{color:var(--text-secondary);max-width:480px;font-size:0.95rem}
+    .section-header{text-align:center;margin-bottom:3.5rem}
+    .divider{width:60px;height:2px;background:linear-gradient(90deg,var(--accent),transparent);margin:0 auto 1rem}
+
+    /* PRODUCTS */
+    .products{padding:100px 5%}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1160px;margin:0 auto}
+    .card{position:relative;background:var(--bg-card);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:2rem 1.6rem 1.8rem;overflow:visible;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
+    .card:hover{transform:translateY(-10px);box-shadow:var(--glow-strong),0 20px 60px rgba(0,0,0,0.5);border-color:rgba(0,212,255,0.45)}
+    .card::before{content:'';position:absolute;inset:0;border-radius:var(--radius);background:radial-gradient(ellipse at 50% 0%,rgba(0,212,255,0.06),transparent 70%);opacity:0;transition:opacity var(--transition);pointer-events:none}
+    .card:hover::before{opacity:1}
+    .char-placeholder{position:absolute;top:-40px;right:8px;font-size:5rem;line-height:1;pointer-events:none;filter:drop-shadow(0 0 16px rgba(0,212,255,0.4));transition:transform var(--transition),filter var(--transition)}
+    .card:hover .char-placeholder{transform:translateY(-6px) scale(1.08);filter:drop-shadow(0 0 28px rgba(0,212,255,0.65))}
+    .card-tag{display:inline-flex;align-items:center;gap:6px;font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.8rem}
+    .card-tag-dot{width:6px;height:6px;background:var(--accent);border-radius:50%}
+    .card-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:0.04em;margin-bottom:0.5rem}
+    .card-desc{font-size:0.82rem;color:var(--text-secondary);line-height:1.5;margin-bottom:1.4rem;max-width:180px}
+    .card-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);color:var(--accent);font-weight:600;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;padding:8px 16px;border-radius:6px;transition:background var(--transition),box-shadow var(--transition);cursor:pointer}
+    .card-btn:hover{background:rgba(0,212,255,0.2);box-shadow:0 0 14px rgba(0,212,255,0.3)}
+
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.78);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.active{display:flex}
+    .modal{background:var(--bg-modal);border:1px solid rgba(0,212,255,0.2);border-radius:18px;width:100%;max-width:500px;box-shadow:0 0 60px rgba(0,212,255,0.12),0 30px 80px rgba(0,0,0,0.7);overflow:hidden;animation:modal-in 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+    @keyframes modal-in{from{opacity:0;transform:translateY(30px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .modal-header{display:flex;align-items:center;justify-content:space-between;padding:22px 24px 18px;border-bottom:1px solid var(--border-subtle)}
+    .modal-title{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.04em}
+    .modal-icon{font-size:1.5rem}
+    .modal-close{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--transition),color var(--transition)}
+    .modal-close:hover{background:rgba(255,80,80,0.15);color:#ff6060}
+    .modal-body{padding:24px}
+    .step{display:none}
+    .step.active{display:block}
+    .step-label{font-size:0.72rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px}
+    .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .offer-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:14px 12px;text-align:left;cursor:pointer;transition:border-color var(--transition),background var(--transition),transform var(--transition);width:100%}
+    .offer-btn:hover{border-color:rgba(0,212,255,0.45);background:rgba(0,212,255,0.06);transform:translateY(-2px)}
+    .offer-btn.selected{border-color:var(--accent);background:rgba(0,212,255,0.1);box-shadow:0 0 12px rgba(0,212,255,0.2)}
+    .offer-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.88rem;color:var(--text-primary);margin-bottom:4px}
+    .offer-price{font-size:0.72rem;color:var(--text-secondary);line-height:1.4}
+    .offer-price strong{color:var(--accent);font-size:0.8rem}
+    .selected-offer-display{display:flex;align-items:center;justify-content:space-between;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:12px 14px;margin-bottom:20px}
+    .selected-offer-display .s-name{font-weight:700;font-size:0.9rem}
+    .selected-offer-display .s-price{font-size:0.78rem;color:var(--text-secondary)}
+    .form-label{display:block;font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px}
+    .form-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:var(--text-primary);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;margin-bottom:6px;transition:border-color var(--transition),box-shadow var(--transition)}
+    .form-input:focus{border-color:rgba(0,212,255,0.4);box-shadow:0 0 0 3px rgba(0,212,255,0.08)}
+    .form-hint{font-size:0.72rem;color:var(--text-secondary);margin-bottom:20px}
+    .modal-actions{display:flex;gap:10px;margin-top:4px}
+    .btn-back{flex:0 0 auto;padding:11px 18px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:0.85rem;cursor:pointer;transition:background var(--transition)}
+    .btn-back:hover{background:rgba(255,255,255,0.1)}
+    .btn-buy{flex:1;padding:13px;border-radius:8px;background:linear-gradient(135deg,var(--accent-alt),var(--accent));border:none;color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);position:relative;overflow:hidden}
+    .btn-buy:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,212,255,0.4)}
+    .btn-buy:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+    .btn-next-wrap{margin-top:16px}
+    .success-screen{text-align:center;padding:10px 0 6px}
+    .success-icon{font-size:3.5rem;margin-bottom:14px}
+    .success-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:8px}
+    .success-desc{font-size:0.85rem;color:var(--text-secondary);line-height:1.6}
+    .success-desc a{color:var(--accent);text-decoration:underline}
+
+    /* FEATURES */
+    .features{padding:100px 5%;background:linear-gradient(180deg,transparent 0%,rgba(0,212,255,0.02) 50%,transparent 100%)}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:1160px;margin:0 auto}
+    .feature-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius);padding:1.8rem 1.6rem;transition:border-color var(--transition),box-shadow var(--transition)}
+    .feature-card:hover{border-color:rgba(0,212,255,0.3);box-shadow:var(--glow)}
+    .feature-icon{font-size:1.8rem;margin-bottom:1rem}
+    .feature-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;letter-spacing:0.04em}
+    .feature-card p{font-size:0.85rem;color:var(--text-secondary);line-height:1.55}
+
+    /* PAYMENT */
+    .payment{padding:60px 5%;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)}
+    .payment-inner{max-width:900px;margin:0 auto;text-align:center}
+    .payment-inner>p{font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-secondary);margin-bottom:2rem}
+    .payment-icons{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2.5rem}
+    .pay-icon{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.35;filter:grayscale(1) brightness(2);transition:opacity var(--transition),filter var(--transition),transform var(--transition);cursor:pointer}
+    .pay-icon:hover{opacity:1;filter:grayscale(0) brightness(1) drop-shadow(0 0 10px rgba(0,212,255,0.5));transform:translateY(-4px)}
+    .pay-icon svg{width:48px;height:48px}
+    .pay-icon span{font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-secondary)}
+
+    /* CONTACT */
+    .contact-section{padding:100px 5%}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:700px;margin:0 auto}
+    .contact-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius);padding:2rem 1.8rem;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center;transition:border-color var(--transition),transform var(--transition),box-shadow var(--transition)}
+    .contact-card:hover{border-color:rgba(0,212,255,0.4);transform:translateY(-6px);box-shadow:var(--glow)}
+    .contact-icon{font-size:2.4rem}
+    .contact-card h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;letter-spacing:0.04em}
+    .contact-card p{font-size:0.82rem;color:var(--text-secondary);line-height:1.5}
+    .contact-link{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.25);color:var(--accent);font-weight:600;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;padding:8px 18px;border-radius:6px;transition:background var(--transition),box-shadow var(--transition)}
+    .contact-link:hover{background:rgba(0,212,255,0.2);box-shadow:0 0 14px rgba(0,212,255,0.3)}
+    .contact-card.wa{border-color:rgba(37,211,102,0.15)}
+    .contact-card.wa:hover{border-color:rgba(37,211,102,0.4);box-shadow:0 0 24px rgba(37,211,102,0.2)}
+    .contact-card.wa .contact-link{background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.3);color:#25D366}
+    .contact-card.wa .contact-link:hover{background:rgba(37,211,102,0.2);box-shadow:0 0 14px rgba(37,211,102,0.3)}
+
+    /* FOOTER */
+    footer{padding:50px 5% 30px;text-align:center}
+    .footer-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.6rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem}
+    .footer-logo span{color:var(--accent);text-shadow:0 0 12px rgba(0,212,255,0.5)}
+    .footer-links{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .footer-links a{font-size:0.8rem;font-weight:500;color:var(--text-secondary);letter-spacing:0.06em;text-transform:uppercase;transition:color var(--transition)}
+    .footer-links a:hover{color:var(--accent)}
+    .footer-powered{display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;color:var(--text-secondary);border:1px solid var(--border-subtle);padding:6px 16px;border-radius:50px;margin-bottom:1.5rem;transition:border-color var(--transition)}
+    .footer-powered:hover{border-color:rgba(0,212,255,0.3)}
+    .footer-powered strong{color:var(--accent)}
+    .footer-copy{font-size:0.72rem;color:rgba(160,160,160,0.4);letter-spacing:0.06em}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:680px){
+      nav{display:none}
+      nav.open{display:flex;flex-direction:column;position:fixed;inset:68px 0 0 0;background:rgba(10,11,16,0.97);backdrop-filter:blur(20px);align-items:center;justify-content:center;gap:2.5rem;z-index:999}
+      nav.open a{font-size:1.2rem}
+      .hamburger{display:flex}
+      .grid{grid-template-columns:1fr}
+      .offer-grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr;max-width:380px}
+      .hero-title{font-size:2.4rem}
+      .cta-btn{font-size:0.95rem;padding:15px 28px}
+    }
+  </style>
+<style id="lection-notification-styles">
+      #lection-scraping-notification {
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 2147483647 !important;
+        background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%) !important;
+        border: 2px solid #000000 !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        max-width: 320px !important;
+        backdrop-filter: blur(8px) !important;
+        animation: lection-notification-slide-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+      }
+
+      #lection-scraping-notification.lection-notification-visible {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+      }
+
+      #lection-scraping-notification.lection-notification-hiding {
+        animation: lection-notification-slide-out 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+      }
+
+      .lection-notification-content {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+      }
+
+      .lection-notification-icon {
+        flex-shrink: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+        color: #000000 !important;
+        margin-top: 2px !important;
+        animation: lection-notification-pulse 2s ease-in-out infinite !important;
+      }
+
+      .lection-notification-text {
+        flex: 1 !important;
+        min-width: 0 !important;
+      }
+
+      .lection-notification-title {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        line-height: 1.3 !important;
+        margin-bottom: 2px !important;
+        font-family: 'SUSE Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+      }
+
+      .lection-notification-subtitle {
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        color: #666666 !important;
+        line-height: 1.4 !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      }
+
+      /* Tab Warning Banner Styles */
+      #lection-tab-warning {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 2147483647 !important;
+        background: #000000 !important;
+        padding: 12px 20px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        transform: translateY(-100%) !important;
+        opacity: 0 !important;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease !important;
+      }
+
+      #lection-tab-warning.lection-tab-warning-visible {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+
+      #lection-tab-warning.lection-tab-warning-hiding {
+        transform: translateY(-100%) !important;
+        opacity: 0 !important;
+      }
+
+      .lection-tab-warning-content {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+      }
+
+      .lection-tab-warning-icon {
+        flex-shrink: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+        color: #FAFAB1 !important;
+        animation: lection-warning-pulse 1.5s ease-in-out infinite !important;
+      }
+
+      .lection-tab-warning-text {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        letter-spacing: 0.5px !important;
+        font-family: 'SUSE Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+      }
+
+      @keyframes lection-warning-pulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes lection-notification-slide-in {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes lection-notification-slide-out {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes lection-notification-pulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.05);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
+        #lection-scraping-notification {
+          top: 60px !important;
+          left: 10px !important;
+          right: 10px !important;
+          max-width: none !important;
+          padding: 12px !important;
+        }
+
+        #lection-tab-warning {
+          padding: 10px 16px !important;
+        }
+
+        .lection-tab-warning-text {
+          font-size: 12px !important;
+          letter-spacing: 0.3px !important;
+        }
+      }
+
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        #lection-scraping-notification {
+          border-width: 3px !important;
+          box-shadow: 0 0 0 2px #000000 !important;
+        }
+
+        #lection-tab-warning {
+          border-bottom: 3px solid #FAFAB1 !important;
+        }
+      }
+
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        #lection-scraping-notification,
+        .lection-notification-icon,
+        .lection-tab-warning-icon {
+          animation: none !important;
+        }
+        
+        #lection-scraping-notification {
+          transform: translateX(0) !important;
+          opacity: 1 !important;
+        }
+
+        #lection-tab-warning {
+          transition: none !important;
+          transform: translateY(0) !important;
+          opacity: 1 !important;
+        }
+      }
+    </style><style id="lection-agent-glow-styles">
+      #lection-agent-glow {
+        position: fixed !important;
+        inset: 10px !important;
+        border-radius: 0 !important;
+        pointer-events: none !important;
+        z-index: 2147483646 !important;
+        opacity: 0 !important;
+        transition: opacity 300ms ease-out !important;
+      }
+
+      #lection-agent-glow::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        width: calc(100% + 32px) !important;
+        height: calc(100% + 32px) !important;
+        transform: translate(-50%, -50%);
+        border-radius: 32px !important;
+        /* Smooth gradient ring with orbiting highlight */
+        --lection-edge-angle: 0deg;
+        background:
+          conic-gradient(
+            from var(--lection-edge-angle),
+            rgba(255, 214, 64, 0.08) 0deg,
+            rgba(255, 214, 64, 0.14) 110deg,
+            rgba(255, 236, 146, 0.45) 140deg,
+            rgba(255, 255, 199, 0.9) 170deg,
+            rgba(255, 214, 64, 0.85) 200deg,
+            rgba(255, 236, 146, 0.45) 230deg,
+            rgba(255, 214, 64, 0.14) 260deg,
+            rgba(255, 214, 64, 0.08) 360deg
+          ),
+          radial-gradient(circle at center, rgba(255, 239, 160, 0.5), transparent 60%),
+          radial-gradient(circle at center, rgba(255, 180, 0, 0.15), transparent 80%) !important;
+        padding: 10px !important;
+        -webkit-mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0) !important;
+        -webkit-mask-composite: xor !important;
+        mask-composite: exclude !important;
+        mix-blend-mode: screen !important;
+        background-blend-mode: screen !important;
+        filter: blur(3px) saturate(1.15);
+        will-change: background !important;
+        animation: lection-edge-orbit 3.8s linear infinite !important;
+        z-index: 1 !important;
+      }
+
+      #lection-agent-glow::after {
+        content: '' !important;
+        position: absolute !important;
+        inset: 4px !important;
+        border-radius: 36px !important;
+        box-shadow: 
+          inset 0 0 30px rgba(255, 214, 64, 0.5),
+          inset 0 0 70px rgba(255, 230, 128, 0.35),
+          inset 0 0 110px rgba(255, 255, 190, 0.25),
+          0 0 48px rgba(255, 214, 64, 0.65),
+          0 0 96px rgba(255, 230, 128, 0.45),
+          0 0 150px rgba(255, 214, 64, 0.32) !important;
+        background: radial-gradient(circle, rgba(255, 255, 204, 0.2), transparent 65%) !important;
+        animation: none !important;
+      }
+
+      #lection-agent-glow.lection-agent-glow-visible {
+        opacity: 1 !important;
+      }
+
+      @property --lection-edge-angle {
+        syntax: '<angle>';
+        inherits: false;
+        initial-value: 0deg;
+      }
+
+      @keyframes lection-edge-orbit {
+        from {
+          --lection-edge-angle: 0deg;
+        }
+        to {
+          --lection-edge-angle: 360deg;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #lection-agent-glow::before,
+        #lection-agent-glow::after {
+          animation: none !important;
+        }
+        #lection-agent-glow::after {
+          filter: blur(0px) !important;
+        }
+      }
+    </style></head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">WOR<span>EX</span></div>
+  <nav id="main-nav">
+    <a href="https://worexprodaja.netlify.app/#products">Proizvodi</a>
+    <a href="https://worexprodaja.netlify.app/#features">Prednosti</a>
+    <a href="https://worexprodaja.netlify.app/#payment">Plaćanje</a>
+    <a href="https://worexprodaja.netlify.app/#contact">Kontakt</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="status-btn"><span class="status-dot"></span>Status Podrške: Online</div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <h1 class="hero-title">Worex Prodaja</h1>
+  <p class="hero-subtitle">Premium gaming valuta isporučena za manje od 5 minuta. Najveći izbor, najbrža dostava, garantovana sigurnost.</p>
+  <div class="trust-badge">
+    <span class="trust-stars">★★★★★</span>
+    <strong id="counter">2,214+</strong> zadovoljnih korisnika
+  </div>
+  <a href="https://worexprodaja.netlify.app/#products" class="cta-btn"><span>⚡</span> Započni kupnju odmah</a>
+  <div class="scroll-hint">
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+      <rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"></rect>
+      <rect x="6" y="5" width="4" height="6" rx="2" fill="currentColor"></rect>
+    </svg>
+    Skroluj
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-header reveal visible" style="transition-delay: 0ms;">
+    <span class="section-label">Katalog</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Premium Ponuda</h2>
+    <p class="section-desc">Svi paketi dolaze sa trenutnom isporukom i 100% garancijom sigurnosti računa.</p>
+  </div>
+  <div class="grid">
+    <div class="card reveal visible" style="transition-delay: 0ms;"><div class="char-placeholder">🎯</div><div class="card-tag"><span class="card-tag-dot"></span>Fortnite</div><h3 class="card-title">V-Bucks</h3><p class="card-desc">Kupuj skinove, battle passove i više bez ikakvih ograničenja.</p><button class="card-btn" onclick="openModal(&#39;fortnite&#39;)">Kupi sada →</button></div>
+    <div class="card reveal visible" style="transition-delay: 80ms;"><div class="char-placeholder">🏹</div><div class="card-tag"><span class="card-tag-dot"></span>Valorant</div><h3 class="card-title">VP Poeni</h3><p class="card-desc">Unlockiraj Jett, Reyna i sve ekskluzivne agente i skinove.</p><button class="card-btn" onclick="openModal(&#39;valorant&#39;)">Kupi sada →</button></div>
+    <div class="card reveal visible" style="transition-delay: 160ms;"><div class="char-placeholder">🟡</div><div class="card-tag"><span class="card-tag-dot"></span>Roblox</div><h3 class="card-title">Robux</h3><p class="card-desc">Premium avatari, dodaci i ekskluzivni predmeti po najboljim cijenama.</p><button class="card-btn" onclick="openModal(&#39;roblox&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">🪖</div><div class="card-tag"><span class="card-tag-dot"></span>PUBG Mobile</div><h3 class="card-title">UC Poeni</h3><p class="card-desc">Royale Pass, skinovi oružja i ekskluzivni kostimi na jednom mjestu.</p><button class="card-btn" onclick="openModal(&#39;pubg&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">🎮</div><div class="card-tag"><span class="card-tag-dot"></span>Steam</div><h3 class="card-title">Steam Wallet</h3><p class="card-desc">Puni Steam novčanik i kupuj igre, DLC i kostime bez provizija.</p><button class="card-btn" onclick="openModal(&#39;steam&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">🎵</div><div class="card-tag"><span class="card-tag-dot"></span>Spotify</div><h3 class="card-title">Premium</h3><p class="card-desc">Muzika bez reklama, offline slušanje i neograničeni preskoci.</p><button class="card-btn" onclick="openModal(&#39;spotify&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">💬</div><div class="card-tag"><span class="card-tag-dot"></span>Discord</div><h3 class="card-title">Nitro</h3><p class="card-desc">Animated avatar, server boosts, custom emojis i 4K streaming.</p><button class="card-btn" onclick="openModal(&#39;discord&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">🚀</div><div class="card-tag"><span class="card-tag-dot"></span>Rocket League</div><h3 class="card-title">Credits</h3><p class="card-desc">Automobili, antene, boost efekti i ekskluzivni paketi.</p><button class="card-btn" onclick="openModal(&#39;rocketleague&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">⛏️</div><div class="card-tag"><span class="card-tag-dot"></span>Minecraft</div><h3 class="card-title">Premium</h3><p class="card-desc">Originalna Java i Bedrock licenca, zauvijek tvoja.</p><button class="card-btn" onclick="openModal(&#39;minecraft&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">⭐</div><div class="card-tag"><span class="card-tag-dot"></span>Brawl Stars</div><h3 class="card-title">Gems &amp; Pass</h3><p class="card-desc">Gems, Brawl Pass i ekskluzivni skinovi za sve brawlere.</p><button class="card-btn" onclick="openModal(&#39;brawlstars&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">🎬</div><div class="card-tag"><span class="card-tag-dot"></span>Netflix</div><h3 class="card-title">Pretplata</h3><p class="card-desc">Neograničen streaming filmova i serija u HD i 4K kvalitetu.</p><button class="card-btn" onclick="openModal(&#39;netflix&#39;)">Kupi sada →</button></div>
+    <div class="card reveal"><div class="char-placeholder">🚗</div><div class="card-tag"><span class="card-tag-dot"></span>GTA V</div><h3 class="card-title">Key</h3><p class="card-desc">Originalni GTA 5 ključ za PC, aktivacija garantovana.</p><button class="card-btn" onclick="openModal(&#39;gta&#39;)">Kupi sada →</button></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-header reveal">
+    <span class="section-label">Zašto Worex</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Prednosti Naše Platforme</h2>
+    <p class="section-desc">Izgrađeni na povjerenju više od 2.200 korisnika širom regije.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>Instant Dostava</h3><p>Automatizovana Nexa isporuka u roku od 1–5 minuta po primitku uplate, 24/7.</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">🔒</div><h3>100% Sigurno</h3><p>Nikada ne tražimo lozinku. Sve transakcije su šifrovane i zaštićene.</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">💬</div><h3>Live Podrška</h3><p>Tim podrške dostupan svaki dan. Odgovaramo u roku od par minuta.</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">🌍</div><h3>Regionalne Cijene</h3><p>Prilagođene cijene za tržišta Balkana. Plaćaj u EUR, BAM, RSD i kriptu.</p></div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section class="payment" id="payment">
+  <div class="payment-inner">
+    <p>Prihvaćamo sve popularne metode plaćanja</p>
+    <div class="payment-icons">
+      <div class="pay-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="white" fill-opacity="0.06" stroke="white" stroke-width="1.5"></circle><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="Inter,sans-serif">SKRILL</text></svg><span>Skrill</span></div>
+      <div class="pay-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="white" fill-opacity="0.06" stroke="white" stroke-width="1.5"></circle><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="9" font-weight="700" fill="white" font-family="Inter,sans-serif">XBON</text></svg><span>Xbon</span></div>
+      <div class="pay-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="white" fill-opacity="0.06" stroke="white" stroke-width="1.5"></circle><path d="M20 14h9a5 5 0 010 10H20m0-10v10m0 0h10a5 5 0 010 10H20m0-10v10" stroke="white" stroke-width="1.8" stroke-linecap="round"></path></svg><span>Crypto</span></div>
+      <div class="pay-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="white" fill-opacity="0.06" stroke="white" stroke-width="1.5"></circle><rect x="13" y="16" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"></rect><line x1="17" y1="22" x2="31" y2="22" stroke="white" stroke-width="1.5"></line><line x1="17" y1="27" x2="25" y2="27" stroke="white" stroke-width="1.5"></line></svg><span>Uplatnica</span></div>
+      <div class="pay-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" fill="white" fill-opacity="0.06" stroke="white" stroke-width="1.5"></circle><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="8" font-weight="700" fill="white" font-family="Inter,sans-serif">PayPal</text></svg><span>PayPal</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-header reveal">
+    <span class="section-label">Kontaktiraj nas</span>
+    <div class="divider"></div>
+    <h2 class="section-title">Tu smo za tebe</h2>
+    <p class="section-desc">Imaš pitanje ili trebaš pomoć? Kontaktiraj nas putem Discord-a ili WhatsApp-a — odgovaramo brzo!</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card reveal">
+      <div class="contact-icon">💬</div>
+      <h3>Discord Server</h3>
+      <p>Pridruži se našem Discord serveru za podršku, pitanja i obavještenja o novim ponudama.</p>
+      <a href="https://discord.gg/worexprodaja" target="_blank" rel="noopener" class="contact-link">Otvori Discord →</a>
+    </div>
+    <div class="contact-card wa reveal">
+      <div class="contact-icon">📱</div>
+      <h3>WhatsApp</h3>
+      <p>Pošalji nam poruku direktno na WhatsApp i odgovorićemo ti u najkraćem roku.</p>
+      <a href="https://wa.me/38161223175" target="_blank" rel="noopener" class="contact-link">Pošalji poruku →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">WOR<span>EX</span></div>
+  <div class="footer-links">
+    <a href="https://worexprodaja.netlify.app/#">Pravila</a>
+    <a href="https://worexprodaja.netlify.app/#">Privatnost</a>
+    <a href="https://worexprodaja.netlify.app/#contact">Kontakt</a>
+    <a href="https://worexprodaja.netlify.app/#">FAQ</a>
+  </div>
+  <div class="footer-powered">⚙️ Powered by <strong>Slaptyx</strong></div>
+  <p class="footer-copy">© 2025 Worex Prodaja. Sva prava zadržana. Nije affilirano s navedenim brendovima.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title">
+        <span class="modal-icon" id="modal-icon">🎮</span>
+        <span id="modal-game-name">Igrica</span>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Step 1: Choose offer -->
+      <div class="step active" id="step1">
+        <div class="step-label">Odaberi paket</div>
+        <div class="offer-grid" id="offer-grid"></div>
+        <div class="btn-next-wrap">
+          <button class="btn-buy" id="btn-next" onclick="goStep2()" disabled="" style="width:100%;margin-top:16px">Dalje →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Email + Phone -->
+      <div class="step" id="step2">
+        <div class="selected-offer-display">
+          <span class="s-name" id="display-offer-name">–</span>
+          <span class="s-price" id="display-offer-price">–</span>
+        </div>
+        <label class="form-label" for="email-input">Email računa</label>
+        <input class="form-input" type="email" id="email-input" placeholder="npr. igrac@gmail.com">
+        <div class="form-hint" style="margin-bottom:14px">Email na koji ste ulogovani u igri / platformi.</div>
+        <label class="form-label" for="phone-input">Broj telefona</label>
+        <input class="form-input" type="tel" id="phone-input" placeholder="npr. +381 61 123 4567">
+        <div class="form-hint">Vaš kontakt broj za potvrdu narudžbe.</div>
+        <div class="modal-actions">
+          <button class="btn-back" onclick="goStep1()">← Nazad</button>
+          <button class="btn-buy" id="btn-buy" onclick="sendOrder()">⚡ Kupi sada</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div class="step" id="step3">
+        <div class="success-screen">
+          <div class="success-icon">✅</div>
+          <div class="success-title">Narudžba primljena!</div>
+          <p class="success-desc">
+            Tvoja narudžba je uspješno poslana.<br>
+            Kontaktiraj nas na <a href="https://discord.gg/worexprodaja" target="_blank">Discord-u</a> ili
+            <a href="https://wa.me/38161223175" target="_blank">WhatsApp-u</a> za brzu potvrdu i isporuku.
+          </p>
+          <button class="btn-buy" style="margin-top:20px;width:100%" onclick="closeModal()">Zatvori</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ============ PRODUCT DATA ============ */
+  const PRODUCTS = {
+    fortnite:     { name:'Fortnite V-Bucks',        icon:'🎯', offers:[{name:'800 V-Bucks',price:'750 RSD / 14 BAM'},{name:'2400 V-Bucks',price:'1.700 RSD / 32 BAM'},{name:'4000 V-Bucks',price:'2.600 RSD / 48 BAM'},{name:'13500 V-Bucks',price:'6.700 RSD / 125 BAM'},{name:'Crew Pack',price:'1.000 RSD / 21 BAM'}]},
+    valorant:     { name:'Valorant VP',              icon:'🏹', offers:[{name:'475 Points',price:'750 RSD / 14 BAM'},{name:'1000 Points',price:'1.400 RSD / 26 BAM'},{name:'2000 Points',price:'2.800 RSD / 53 BAM'},{name:'3650 Points',price:'4.400 RSD / 84 BAM'}]},
+    roblox:       { name:'Roblox Robux',             icon:'🟡', offers:[{name:'500 Robux',price:'700 RSD / 14 BAM'},{name:'800 Robux',price:'1.050 RSD / 20 BAM'},{name:'1000 Robux',price:'1.590 RSD / 31 BAM'},{name:'2000 Robux',price:'1.900 RSD / 36 BAM'},{name:'4000 Robux',price:'4.290 RSD / 83 BAM'}]},
+    pubg:         { name:'PUBG Mobile UC',           icon:'🪖', offers:[{name:'60 UC',price:'430 RSD / 9 BAM'},{name:'330 UC',price:'930 RSD / 18 BAM'},{name:'660 UC',price:'1.640 RSD / 30 BAM'},{name:'1800 UC',price:'3.400 RSD / 64 BAM'},{name:'3850 UC',price:'6.450 RSD / 121 BAM'}]},
+    steam:        { name:'Steam Wallet',             icon:'🎮', offers:[{name:'10€',price:'1.600 RSD / 35 BAM'},{name:'20€',price:'3.000 RSD / 56 BAM'},{name:'50€',price:'6.700 RSD / 125 BAM'},{name:'100€',price:'13.500 RSD / 250 BAM'}]},
+    spotify:      { name:'Spotify Premium',          icon:'🎵', offers:[{name:'3 Meseca',price:'1.400 RSD / 26 BAM'},{name:'6 Meseci',price:'2.230 RSD / 42 BAM'},{name:'Lifetime',price:'2.400 RSD / 45 BAM'}]},
+    discord:      { name:'Discord Nitro',            icon:'💬', offers:[{name:'1 Mesec',price:'1.100 RSD / 21 BAM'},{name:'3 Meseca',price:'2.650 RSD / 50 BAM'},{name:'6 Meseci',price:'8.200 RSD / 153 BAM'}]},
+    rocketleague: { name:'Rocket League Credits',    icon:'🚀', offers:[{name:'500 Credits',price:'800 RSD / 15 BAM'},{name:'1100 Credits',price:'1.640 RSD / 31 BAM'},{name:'3000 Credits',price:'3.400 RSD / 64 BAM'},{name:'6500 Credits',price:'5.750 RSD / 108 BAM'}]},
+    minecraft:    { name:'Minecraft Premium',        icon:'⛏️', offers:[{name:'1x Premium',price:'1.700 RSD / 32 BAM'},{name:'2x Premium',price:'2.900 RSD / 55 BAM'}]},
+    brawlstars:   { name:'Brawl Stars',              icon:'⭐', offers:[{name:'30 Gems',price:'440 RSD / 8 BAM'},{name:'80 Gems',price:'800 RSD / 15 BAM'},{name:'170 Gems',price:'1.390 RSD / 26 BAM'},{name:'360 Gems',price:'2.630 RSD / 46 BAM'},{name:'Pass Basic',price:'1.000 RSD / 20 BAM'},{name:'Pass Plus',price:'1.400 RSD / 28 BAM'}]},
+    netflix:      { name:'Netflix',                  icon:'🎬', offers:[{name:'1 Mesec',price:'700 RSD / 13 BAM'},{name:'3 Meseca',price:'1.400 RSD / 26 BAM'},{name:'6 Meseci',price:'1.900 RSD / 36 BAM'},{name:'12 Meseci',price:'3.400 RSD / 65 BAM'}]},
+    gta:          { name:'GTA V Key',                icon:'🚗', offers:[{name:'GTA 5 Key',price:'2.350 RSD / 44 BAM'}]},
+  };
+
+  /* ============================================================
+     KONFIGURACIJA — samo ovo popuni!
+     1) Napravi Google Apps Script (upute su u admin-panel.html)
+     2) Zalijepite deploy URL ovdje:
+  ============================================================ */
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUdE9kDhxE6UzqSVZeq9NW835LC58M1WsydvM3g5JwPrY6tOpP1n2VxQ-FuC93EIKt/exec';
+
+  let currentGame = null, selectedOffer = null;
+
+  function openModal(game) {
+    currentGame = game; selectedOffer = null;
+    const p = PRODUCTS[game];
+    document.getElementById('modal-icon').textContent      = p.icon;
+    document.getElementById('modal-game-name').textContent = p.name;
+
+    const grid = document.getElementById('offer-grid');
+    grid.innerHTML = '';
+    p.offers.forEach((offer, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'offer-btn';
+      btn.innerHTML = `<div class="offer-name">${offer.name}</div><div class="offer-price"><strong>${offer.price}</strong></div>`;
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.offer-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedOffer = p.offers[i];
+        document.getElementById('btn-next').disabled = false;
+      });
+      grid.appendChild(btn);
+    });
+
+    showStep(1);
+    document.getElementById('btn-next').disabled = true;
+    document.getElementById('email-input').value = '';
+    document.getElementById('phone-input').value = '';
+    document.getElementById('modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal-overlay').addEventListener('click', e => { if(e.target===document.getElementById('modal-overlay')) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step'+n).classList.add('active');
+  }
+
+  function goStep2() {
+    if(!selectedOffer) return;
+    document.getElementById('display-offer-name').textContent  = selectedOffer.name;
+    document.getElementById('display-offer-price').textContent = selectedOffer.price;
+    showStep(2);
+  }
+
+  function goStep1() { showStep(1); }
+
+  async function sendOrder() {
+    const emailEl = document.getElementById('email-input');
+    const phoneEl = document.getElementById('phone-input');
+    const email   = emailEl.value.trim();
+    const phone   = phoneEl.value.trim();
+
+    /* Validacija */
+    let valid = true;
+    if (!email || !email.includes('@')) { emailEl.style.borderColor='rgba(255,80,80,0.6)'; valid=false; } else { emailEl.style.borderColor=''; }
+    if (!phone || phone.length < 6)    { phoneEl.style.borderColor='rgba(255,80,80,0.6)'; valid=false; } else { phoneEl.style.borderColor=''; }
+    if (!valid) return;
+
+    const buyBtn = document.getElementById('btn-buy');
+    buyBtn.disabled = true; buyBtn.textContent = 'Šaljem...';
+
+    const order = {
+      id:        'WX-' + Date.now(),
+      timestamp: new Date().toLocaleString('bs-BA'),
+      game:      PRODUCTS[currentGame].name,
+      icon:      PRODUCTS[currentGame].icon,
+      package:   selectedOffer.name,
+      price:     selectedOffer.price,
+      email,
+      phone,
+      status:    'Nova'
+    };
+
+    /* 1) Pošalji na Google Sheets */
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode:   'no-cors',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(order)
+      });
+    } catch(e) { console.warn('Sheets greška:', e); }
+
+    /* 2) Spremi lokalno — admin panel čita ovo */
+    try {
+      const saved = JSON.parse(localStorage.getItem('worex_orders') || '[]');
+      saved.unshift(order);
+      localStorage.setItem('worex_orders', JSON.stringify(saved));
+    } catch(e) {}
+
+    buyBtn.disabled = false; buyBtn.textContent = '⚡ Kupi sada';
+    showStep(3);
+  }
+
+  /* HAMBURGER */
+  const hamburger = document.getElementById('hamburger');
+  const nav       = document.getElementById('main-nav');
+  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(l => l.addEventListener('click', () => nav.classList.remove('open')));
+
+  /* SCROLL REVEAL */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const siblings = [...entry.target.parentElement.children].filter(c=>c.classList.contains('reveal'));
+      entry.target.style.transitionDelay = (siblings.indexOf(entry.target)*80)+'ms';
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* COUNTER */
+  const counterEl = document.getElementById('counter');
+  let cnt = 2100;
+  const heroObs = new IntersectionObserver(e => {
+    if(e[0].isIntersecting) {
+      const t = setInterval(() => { cnt+=4; if(cnt>=2214){cnt=2214;clearInterval(t);} counterEl.textContent=cnt.toLocaleString('bs')+'+'; }, 40);
+      heroObs.disconnect();
+    }
+  });
+  heroObs.observe(document.querySelector('.hero'));
+</script>
+
+
+<div id="lection-scraping-notification" style="display: none;"><div class="lection-notification-content"><div class="lection-notification-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></div><div class="lection-notification-text"><div class="lection-notification-title">Lection is scraping</div><div class="lection-notification-subtitle">Please don't unfocus, close, or edit this page</div></div></div></div><div id="lection-tab-warning" style="display: none;"><div class="lection-tab-warning-content"><div class="lection-tab-warning-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div><span class="lection-tab-warning-text">DO NOT SWITCH TABS DURING LECTION SCRAPE</span></div></div><div id="lection-agent-glow" aria-hidden="true"></div></body></html>

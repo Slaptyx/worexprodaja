@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://worexprodaja.netlify.app/admin.html -->
+<html lang="bs"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Worex Admin – Narudžbe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link href="./Worex Admin – Narudžbe_files/css2" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0A0B10;--card:#161B22;--accent:#00D4FF;--accent2:#007BFF;
+      --green:#00FF88;--red:#FF5555;--yellow:#FFD700;
+      --text:#fff;--muted:#A0A0A0;--border:rgba(255,255,255,0.08);
+      --r:12px;--tr:0.25s ease;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+
+    /* LOGIN SCREEN */
+    #login-screen{
+      display:flex;align-items:center;justify-content:center;
+      min-height:100vh;padding:20px;
+      background:radial-gradient(ellipse at 50% 0%,rgba(0,212,255,0.08) 0%,transparent 60%);
+    }
+    .login-box{
+      background:var(--card);border:1px solid rgba(0,212,255,0.2);
+      border-radius:18px;padding:2.5rem 2rem;width:100%;max-width:380px;
+      box-shadow:0 0 60px rgba(0,212,255,0.1);text-align:center;
+    }
+    .login-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.8rem;letter-spacing:0.15em;margin-bottom:0.4rem}
+    .login-logo span{color:var(--accent);text-shadow:0 0 12px rgba(0,212,255,0.6)}
+    .login-sub{font-size:0.8rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2rem}
+    .login-label{display:block;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;text-align:left}
+    .login-input{
+      width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);
+      border-radius:8px;padding:12px 14px;color:var(--text);font-family:'Inter',sans-serif;
+      font-size:0.95rem;outline:none;margin-bottom:1.2rem;
+      transition:border-color var(--tr),box-shadow var(--tr);
+    }
+    .login-input:focus{border-color:rgba(0,212,255,0.4);box-shadow:0 0 0 3px rgba(0,212,255,0.08)}
+    .login-btn{
+      width:100%;padding:13px;border-radius:8px;
+      background:linear-gradient(135deg,var(--accent2),var(--accent));
+      border:none;color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;
+      font-size:0.9rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;
+      transition:transform var(--tr),box-shadow var(--tr);
+    }
+    .login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,212,255,0.4)}
+    .login-err{color:#FF5555;font-size:0.8rem;margin-top:10px;display:none}
+
+    /* ADMIN PANEL */
+    #admin-panel{display:none}
+
+    /* TOP BAR */
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 2rem;height:64px;
+      background:rgba(22,27,34,0.85);backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:0.12em}
+    .topbar-logo span{color:var(--accent)}
+    .topbar-badge{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.05);border:1px solid var(--border);padding:4px 10px;border-radius:50px}
+    .topbar-right{display:flex;align-items:center;gap:12px}
+    .logout-btn{background:rgba(255,85,85,0.1);border:1px solid rgba(255,85,85,0.3);color:#FF5555;font-size:0.78rem;font-weight:600;padding:6px 14px;border-radius:6px;cursor:pointer;transition:background var(--tr)}
+    .logout-btn:hover{background:rgba(255,85,85,0.2)}
+
+    /* MAIN */
+    .main{padding:2rem}
+
+    /* STATS ROW */
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem}
+    .stat-card{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+      padding:1.2rem 1.4rem;
+    }
+    .stat-label{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+    .stat-value{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.8rem;color:var(--text)}
+    .stat-value.green{color:var(--green)}
+    .stat-value.blue{color:var(--accent)}
+
+    /* TOOLBAR */
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap}
+    .toolbar-left{display:flex;gap:10px;flex-wrap:wrap}
+    .search-input{
+      background:var(--card);border:1px solid var(--border);border-radius:8px;
+      padding:8px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.85rem;
+      outline:none;width:220px;transition:border-color var(--tr);
+    }
+    .search-input:focus{border-color:rgba(0,212,255,0.35)}
+    .filter-select{
+      background:var(--card);border:1px solid var(--border);border-radius:8px;
+      padding:8px 12px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.85rem;
+      outline:none;cursor:pointer;
+    }
+    .icon-btn{
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);
+      color:var(--accent);font-size:0.78rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+      padding:8px 14px;border-radius:6px;cursor:pointer;transition:background var(--tr);white-space:nowrap;
+    }
+    .icon-btn:hover{background:rgba(0,212,255,0.16)}
+    .danger-btn{
+      background:rgba(255,85,85,0.08);border:1px solid rgba(255,85,85,0.25);color:#FF5555;
+    }
+    .danger-btn:hover{background:rgba(255,85,85,0.16)}
+
+    /* TABLE */
+    .table-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)}
+    table{width:100%;border-collapse:collapse;font-size:0.83rem}
+    thead tr{background:rgba(0,212,255,0.05);border-bottom:1px solid var(--border)}
+    thead th{padding:12px 14px;text-align:left;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    tbody tr{border-bottom:1px solid rgba(255,255,255,0.04);transition:background var(--tr)}
+    tbody tr:hover{background:rgba(255,255,255,0.02)}
+    tbody tr:last-child{border-bottom:none}
+    td{padding:11px 14px;vertical-align:middle}
+
+    .td-id{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;color:var(--muted)}
+    .td-game{display:flex;align-items:center;gap:8px;font-weight:600}
+    .td-icon{font-size:1.2rem}
+    .td-email{color:var(--accent);font-size:0.8rem}
+    .td-phone{color:var(--muted);font-size:0.8rem}
+
+    /* Status badge */
+    .status-badge{
+      display:inline-block;padding:3px 10px;border-radius:50px;
+      font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+    }
+    .s-nova{background:rgba(0,212,255,0.12);color:var(--accent);border:1px solid rgba(0,212,255,0.25)}
+    .s-obradjena{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.25)}
+    .s-otkazana{background:rgba(255,85,85,0.1);color:#FF5555;border:1px solid rgba(255,85,85,0.25)}
+
+    /* Row actions */
+    .row-actions{display:flex;gap:6px}
+    .act-btn{
+      padding:4px 10px;border-radius:5px;font-size:0.7rem;font-weight:600;cursor:pointer;border:1px solid;transition:background var(--tr);
+    }
+    .act-done{border-color:rgba(0,255,136,0.3);color:var(--green);background:rgba(0,255,136,0.08)}
+    .act-done:hover{background:rgba(0,255,136,0.18)}
+    .act-del{border-color:rgba(255,85,85,0.3);color:#FF5555;background:rgba(255,85,85,0.08)}
+    .act-del:hover{background:rgba(255,85,85,0.18)}
+
+    /* Empty state */
+    .empty{text-align:center;padding:4rem 2rem;color:var(--muted)}
+    .empty-icon{font-size:3rem;margin-bottom:1rem;opacity:0.4}
+    .empty p{font-size:0.9rem}
+
+    /* Toast */
+    .toast{
+      position:fixed;bottom:24px;right:24px;z-index:9999;
+      background:var(--card);border:1px solid rgba(0,255,136,0.3);
+      color:var(--green);padding:12px 20px;border-radius:10px;
+      font-size:0.85rem;font-weight:600;
+      box-shadow:0 0 24px rgba(0,255,136,0.2);
+      animation:slide-in 0.3s ease,fade-out 0.4s ease 2s forwards;
+      pointer-events:none;
+    }
+    @keyframes slide-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fade-out{to{opacity:0;transform:translateY(-6px)}}
+
+    /* Confirm modal */
+    .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center}
+    .confirm-overlay.open{display:flex}
+    .confirm-box{background:var(--card);border:1px solid rgba(255,85,85,0.3);border-radius:14px;padding:2rem;max-width:340px;width:100%;text-align:center}
+    .confirm-box h3{font-family:'Montserrat',sans-serif;font-weight:800;margin-bottom:0.8rem}
+    .confirm-box p{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem}
+    .confirm-btns{display:flex;gap:10px}
+    .confirm-cancel{flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--muted);cursor:pointer}
+    .confirm-ok{flex:1;padding:10px;border-radius:8px;background:rgba(255,85,85,0.15);border:1px solid rgba(255,85,85,0.35);color:#FF5555;font-weight:700;cursor:pointer}
+    .confirm-ok:hover{background:rgba(255,85,85,0.25)}
+
+    @media(max-width:600px){
+      .main{padding:1rem}
+      .search-input{width:100%}
+      .topbar{padding:0 1rem}
+    }
+  </style>
+<style id="lection-notification-styles">
+      #lection-scraping-notification {
+        position: fixed !important;
+        top: 20px !important;
+        left: 20px !important;
+        z-index: 2147483647 !important;
+        background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%) !important;
+        border: 2px solid #000000 !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        max-width: 320px !important;
+        backdrop-filter: blur(8px) !important;
+        animation: lection-notification-slide-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+      }
+
+      #lection-scraping-notification.lection-notification-visible {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+      }
+
+      #lection-scraping-notification.lection-notification-hiding {
+        animation: lection-notification-slide-out 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+      }
+
+      .lection-notification-content {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+      }
+
+      .lection-notification-icon {
+        flex-shrink: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+        color: #000000 !important;
+        margin-top: 2px !important;
+        animation: lection-notification-pulse 2s ease-in-out infinite !important;
+      }
+
+      .lection-notification-text {
+        flex: 1 !important;
+        min-width: 0 !important;
+      }
+
+      .lection-notification-title {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #000000 !important;
+        line-height: 1.3 !important;
+        margin-bottom: 2px !important;
+        font-family: 'SUSE Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+      }
+
+      .lection-notification-subtitle {
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        color: #666666 !important;
+        line-height: 1.4 !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      }
+
+      /* Tab Warning Banner Styles */
+      #lection-tab-warning {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 2147483647 !important;
+        background: #000000 !important;
+        padding: 12px 20px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        transform: translateY(-100%) !important;
+        opacity: 0 !important;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease !important;
+      }
+
+      #lection-tab-warning.lection-tab-warning-visible {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+
+      #lection-tab-warning.lection-tab-warning-hiding {
+        transform: translateY(-100%) !important;
+        opacity: 0 !important;
+      }
+
+      .lection-tab-warning-content {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+      }
+
+      .lection-tab-warning-icon {
+        flex-shrink: 0 !important;
+        width: 20px !important;
+        height: 20px !important;
+        color: #FAFAB1 !important;
+        animation: lection-warning-pulse 1.5s ease-in-out infinite !important;
+      }
+
+      .lection-tab-warning-text {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        letter-spacing: 0.5px !important;
+        font-family: 'SUSE Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+      }
+
+      @keyframes lection-warning-pulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.6;
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes lection-notification-slide-in {
+        from {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes lection-notification-slide-out {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes lection-notification-pulse {
+        0%, 100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.05);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
+        #lection-scraping-notification {
+          top: 60px !important;
+          left: 10px !important;
+          right: 10px !important;
+          max-width: none !important;
+          padding: 12px !important;
+        }
+
+        #lection-tab-warning {
+          padding: 10px 16px !important;
+        }
+
+        .lection-tab-warning-text {
+          font-size: 12px !important;
+          letter-spacing: 0.3px !important;
+        }
+      }
+
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        #lection-scraping-notification {
+          border-width: 3px !important;
+          box-shadow: 0 0 0 2px #000000 !important;
+        }
+
+        #lection-tab-warning {
+          border-bottom: 3px solid #FAFAB1 !important;
+        }
+      }
+
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        #lection-scraping-notification,
+        .lection-notification-icon,
+        .lection-tab-warning-icon {
+          animation: none !important;
+        }
+        
+        #lection-scraping-notification {
+          transform: translateX(0) !important;
+          opacity: 1 !important;
+        }
+
+        #lection-tab-warning {
+          transition: none !important;
+          transform: translateY(0) !important;
+          opacity: 1 !important;
+        }
+      }
+    </style><style id="lection-agent-glow-styles">
+      #lection-agent-glow {
+        position: fixed !important;
+        inset: 10px !important;
+        border-radius: 0 !important;
+        pointer-events: none !important;
+        z-index: 2147483646 !important;
+        opacity: 0 !important;
+        transition: opacity 300ms ease-out !important;
+      }
+
+      #lection-agent-glow::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        width: calc(100% + 32px) !important;
+        height: calc(100% + 32px) !important;
+        transform: translate(-50%, -50%);
+        border-radius: 32px !important;
+        /* Smooth gradient ring with orbiting highlight */
+        --lection-edge-angle: 0deg;
+        background:
+          conic-gradient(
+            from var(--lection-edge-angle),
+            rgba(255, 214, 64, 0.08) 0deg,
+            rgba(255, 214, 64, 0.14) 110deg,
+            rgba(255, 236, 146, 0.45) 140deg,
+            rgba(255, 255, 199, 0.9) 170deg,
+            rgba(255, 214, 64, 0.85) 200deg,
+            rgba(255, 236, 146, 0.45) 230deg,
+            rgba(255, 214, 64, 0.14) 260deg,
+            rgba(255, 214, 64, 0.08) 360deg
+          ),
+          radial-gradient(circle at center, rgba(255, 239, 160, 0.5), transparent 60%),
+          radial-gradient(circle at center, rgba(255, 180, 0, 0.15), transparent 80%) !important;
+        padding: 10px !important;
+        -webkit-mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0) !important;
+        -webkit-mask-composite: xor !important;
+        mask-composite: exclude !important;
+        mix-blend-mode: screen !important;
+        background-blend-mode: screen !important;
+        filter: blur(3px) saturate(1.15);
+        will-change: background !important;
+        animation: lection-edge-orbit 3.8s linear infinite !important;
+        z-index: 1 !important;
+      }
+
+      #lection-agent-glow::after {
+        content: '' !important;
+        position: absolute !important;
+        inset: 4px !important;
+        border-radius: 36px !important;
+        box-shadow: 
+          inset 0 0 30px rgba(255, 214, 64, 0.5),
+          inset 0 0 70px rgba(255, 230, 128, 0.35),
+          inset 0 0 110px rgba(255, 255, 190, 0.25),
+          0 0 48px rgba(255, 214, 64, 0.65),
+          0 0 96px rgba(255, 230, 128, 0.45),
+          0 0 150px rgba(255, 214, 64, 0.32) !important;
+        background: radial-gradient(circle, rgba(255, 255, 204, 0.2), transparent 65%) !important;
+        animation: none !important;
+      }
+
+      #lection-agent-glow.lection-agent-glow-visible {
+        opacity: 1 !important;
+      }
+
+      @property --lection-edge-angle {
+        syntax: '<angle>';
+        inherits: false;
+        initial-value: 0deg;
+      }
+
+      @keyframes lection-edge-orbit {
+        from {
+          --lection-edge-angle: 0deg;
+        }
+        to {
+          --lection-edge-angle: 360deg;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #lection-agent-glow::before,
+        #lection-agent-glow::after {
+          animation: none !important;
+        }
+        #lection-agent-glow::after {
+          filter: blur(0px) !important;
+        }
+      }
+    </style></head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">WOR<span>EX</span></div>
+    <div class="login-sub">Admin Panel</div>
+    <label class="login-label" for="pw">Lozinka</label>
+    <input class="login-input" type="password" id="pw" placeholder="••••••••" onkeydown="if(event.key===&#39;Enter&#39;)doLogin()">
+    <button class="login-btn" onclick="doLogin()">Prijavi se</button>
+    <div class="login-err" id="login-err">❌ Pogrešna lozinka</div>
+  </div>
+</div>
+
+<!-- ===================== ADMIN ===================== -->
+<div id="admin-panel">
+
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="topbar-logo">WOR<span>EX</span></div>
+      <div class="topbar-badge">Admin Panel</div>
+    </div>
+    <div class="topbar-right">
+      <span id="live-indicator" style="font-size:0.72rem;color:#00FF88;display:flex;align-items:center;gap:6px">
+        <span style="width:7px;height:7px;background:#00FF88;border-radius:50%;display:inline-block;box-shadow:0 0 6px #00FF88;animation:pulse-g 1.8s infinite"></span>
+        Live
+      </span>
+      <button class="logout-btn" onclick="doLogout()">Odjavi se</button>
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Ukupno narudžbi</div>
+        <div class="stat-value blue" id="stat-total">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Nove (neobrađene)</div>
+        <div class="stat-value" id="stat-new">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Obrađene</div>
+        <div class="stat-value green" id="stat-done">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Danas</div>
+        <div class="stat-value blue" id="stat-today">0</div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <input class="search-input" type="text" id="search" placeholder="🔍  Pretraži email, telefon, igru..." oninput="renderTable()">
+        <select class="filter-select" id="filter-status" onchange="renderTable()">
+          <option value="">Sve narudžbe</option>
+          <option value="Nova">Nova</option>
+          <option value="Obrađena">Obrađena</option>
+          <option value="Otkazana">Otkazana</option>
+        </select>
+        <select class="filter-select" id="filter-game" onchange="renderTable()">
+          <option value="">Sve igre</option>
+        </select>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="icon-btn" onclick="exportCSV()">📥 Export CSV</button>
+        <button class="icon-btn" onclick="refreshData()">🔄 Osvježi</button>
+        <button class="icon-btn danger-btn" onclick="openConfirm(&#39;clearAll&#39;)">🗑 Obriši sve</button>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Datum &amp; Vrijeme</th>
+            <th>Igra / Platforma</th>
+            <th>Paket</th>
+            <th>Cijena</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Status</th>
+            <th>Akcije</th>
+          </tr>
+        </thead>
+        <tbody id="orders-tbody"></tbody>
+      </table>
+      <div class="empty" id="empty-state" style="display:none">
+        <div class="empty-icon">📭</div>
+        <p>Nema narudžbi za prikaz.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <h3 id="confirm-title">Potvrdi akciju</h3>
+    <p id="confirm-msg">Jeste li sigurni?</p>
+    <div class="confirm-btns">
+      <button class="confirm-cancel" onclick="closeConfirm()">Odustani</button>
+      <button class="confirm-ok" id="confirm-ok-btn">Potvrdi</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes pulse-g{0%,100%{opacity:1;box-shadow:0 0 6px #00FF88}50%{opacity:0.5;box-shadow:0 0 14px #00FF88}}
+</style>
+
+<script>
+  /* ============================================================
+     ⚙️  KONFIGURACIJA — postavi svoju lozinku ovdje!
+  ============================================================ */
+  const ADMIN_PASSWORD   = 'ivanworex2026';          // ← PROMIJENI OVO!
+  const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzUdE9kDhxE6UzqSVZeq9NW835LC58M1WsydvM3g5JwPrY6tOpP1n2VxQ-FuC93EIKt/exec'; // isti URL kao u index.html
+
+  /* ============================================================
+     LOGIN
+  ============================================================ */
+  function doLogin() {
+    const pw = document.getElementById('pw').value;
+    if (pw === ADMIN_PASSWORD) {
+      sessionStorage.setItem('worex_admin', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display  = 'block';
+      init();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+      document.getElementById('pw').style.borderColor    = 'rgba(255,85,85,0.6)';
+      setTimeout(() => { document.getElementById('pw').style.borderColor=''; }, 1500);
+    }
+  }
+
+  function doLogout() {
+    sessionStorage.removeItem('worex_admin');
+    location.reload();
+  }
+
+  // Auto-login if session active
+  if (sessionStorage.getItem('worex_admin') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display  = 'block';
+  }
+
+  /* ============================================================
+     DATA — čita iz localStorage (narudžbe koje su stigle dok
+     je admin panel otvoren u istom browseru) + može fetchati
+     iz Google Sheets
+  ============================================================ */
+  let allOrders = [];
+
+  function loadOrders() {
+    try {
+      allOrders = JSON.parse(localStorage.getItem('worex_orders') || '[]');
+    } catch(e) { allOrders = []; }
+  }
+
+  function saveOrders() {
+    localStorage.setItem('worex_orders', JSON.stringify(allOrders));
+  }
+
+  /* ============================================================
+     INIT
+  ============================================================ */
+  function init() {
+    loadOrders();
+    buildGameFilter();
+    renderStats();
+    renderTable();
+    // Auto-refresh svake 15 sekundi
+    setInterval(() => { loadOrders(); renderStats(); renderTable(); }, 15000);
+  }
+
+  function refreshData() {
+    loadOrders();
+    renderStats();
+    renderTable();
+    toast('Podaci osvježeni ✓');
+  }
+
+  /* ============================================================
+     GAME FILTER DROPDOWN
+  ============================================================ */
+  function buildGameFilter() {
+    const games = [...new Set(allOrders.map(o=>o.game))].sort();
+    const sel   = document.getElementById('filter-game');
+    sel.innerHTML = '<option value="">Sve igre</option>';
+    games.forEach(g => { const o=document.createElement('option'); o.value=g; o.textContent=g; sel.appendChild(o); });
+  }
+
+  /* ============================================================
+     STATS
+  ============================================================ */
+  function renderStats() {
+    const today = new Date().toLocaleDateString('bs-BA');
+    document.getElementById('stat-total').textContent = allOrders.length;
+    document.getElementById('stat-new').textContent   = allOrders.filter(o=>o.status==='Nova').length;
+    document.getElementById('stat-done').textContent  = allOrders.filter(o=>o.status==='Obrađena').length;
+    document.getElementById('stat-today').textContent = allOrders.filter(o=>o.timestamp && o.timestamp.startsWith(today)).length;
+  }
+
+  /* ============================================================
+     TABLE RENDER
+  ============================================================ */
+  function renderTable() {
+    const search  = document.getElementById('search').value.toLowerCase();
+    const fStatus = document.getElementById('filter-status').value;
+    const fGame   = document.getElementById('filter-game').value;
+
+    let filtered = allOrders.filter(o => {
+      const matchSearch = !search ||
+        (o.email||'').toLowerCase().includes(search) ||
+        (o.phone||'').toLowerCase().includes(search) ||
+        (o.game||'').toLowerCase().includes(search)  ||
+        (o.id||'').toLowerCase().includes(search);
+      const matchStatus = !fStatus || o.status === fStatus;
+      const matchGame   = !fGame   || o.game   === fGame;
+      return matchSearch && matchStatus && matchGame;
+    });
+
+    const tbody = document.getElementById('orders-tbody');
+    const empty = document.getElementById('empty-state');
+
+    if (!filtered.length) {
+      tbody.innerHTML = ''; empty.style.display = 'block'; return;
+    }
+    empty.style.display = 'none';
+
+    tbody.innerHTML = filtered.map((o,idx) => {
+      const realIdx = allOrders.findIndex(x=>x.id===o.id);
+      const badgeClass = o.status==='Nova' ? 's-nova' : o.status==='Obrađena' ? 's-obradjena' : 's-otkazana';
+      return `
+        <tr>
+          <td class="td-id">${o.id||'–'}</td>
+          <td style="white-space:nowrap;color:var(--muted);font-size:0.78rem">${o.timestamp||'–'}</td>
+          <td><div class="td-game"><span class="td-icon">${o.icon||'🎮'}</span>${o.game||'–'}</div></td>
+          <td style="font-weight:600">${o.package||'–'}</td>
+          <td style="color:var(--accent);font-weight:600;white-space:nowrap">${o.price||'–'}</td>
+          <td class="td-email">${o.email||'–'}</td>
+          <td class="td-phone">${o.phone||'–'}</td>
+          <td><span class="status-badge ${badgeClass}">${o.status||'Nova'}</span></td>
+          <td>
+            <div class="row-actions">
+              ${o.status!=='Obrađena'?`<button class="act-btn act-done" onclick="markDone(${realIdx})">✓ Obrađi</button>`:''}
+              <button class="act-btn act-del" onclick="openConfirm('del',${realIdx})">✕</button>
+            </div>
+          </td>
+        </tr>`;
+    }).join('');
+  }
+
+  /* ============================================================
+     ACTIONS
+  ============================================================ */
+  function markDone(idx) {
+    allOrders[idx].status = 'Obrađena';
+    saveOrders(); renderStats(); renderTable();
+    toast('Narudžba označena kao obrađena ✓');
+  }
+
+  function deleteOrder(idx) {
+    allOrders.splice(idx,1);
+    saveOrders(); buildGameFilter(); renderStats(); renderTable();
+    toast('Narudžba obrisana');
+  }
+
+  function clearAll() {
+    allOrders = [];
+    saveOrders(); renderStats(); renderTable();
+    toast('Sve narudžbe obrisane');
+  }
+
+  /* ============================================================
+     CONFIRM MODAL
+  ============================================================ */
+  let confirmAction = null;
+
+  function openConfirm(type, idx) {
+    const overlay = document.getElementById('confirm-overlay');
+    const okBtn   = document.getElementById('confirm-ok-btn');
+    if (type === 'del') {
+      document.getElementById('confirm-title').textContent = 'Obriši narudžbu?';
+      document.getElementById('confirm-msg').textContent   = 'Ova akcija se ne može poništiti.';
+      confirmAction = () => { deleteOrder(idx); closeConfirm(); };
+    } else {
+      document.getElementById('confirm-title').textContent = 'Obriši SVE narudžbe?';
+      document.getElementById('confirm-msg').textContent   = 'Ovo će trajno obrisati sve lokalno sačuvane narudžbe!';
+      confirmAction = () => { clearAll(); closeConfirm(); };
+    }
+    okBtn.onclick = confirmAction;
+    overlay.classList.add('open');
+  }
+
+  function closeConfirm() {
+    document.getElementById('confirm-overlay').classList.remove('open');
+    confirmAction = null;
+  }
+
+  /* ============================================================
+     EXPORT CSV
+  ============================================================ */
+  function exportCSV() {
+    if (!allOrders.length) { toast('Nema narudžbi za export'); return; }
+    const header = ['ID','Datum','Igra','Paket','Cijena','Email','Telefon','Status'];
+    const rows   = allOrders.map(o => [o.id, o.timestamp, o.game, o.package, o.price, o.email, o.phone, o.status].map(v=>`"${(v||'').replace(/"/g,'""')}"`).join(','));
+    const csv    = [header.join(','), ...rows].join('\n');
+    const blob   = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+    const url    = URL.createObjectURL(blob);
+    const a      = document.createElement('a'); a.href=url; a.download='worex-narudžbe.csv'; a.click();
+    URL.revokeObjectURL(url);
+    toast('CSV exportovan ✓');
+  }
+
+  /* ============================================================
+     TOAST NOTIFICATION
+  ============================================================ */
+  function toast(msg) {
+    const t = document.createElement('div'); t.className='toast'; t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2600);
+  }
+
+  /* Auto-init if already logged in */
+  if (sessionStorage.getItem('worex_admin') === '1') init();
+</script>
+
+
+<div id="lection-scraping-notification" style="display: none;"><div class="lection-notification-content"><div class="lection-notification-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></div><div class="lection-notification-text"><div class="lection-notification-title">Lection is scraping</div><div class="lection-notification-subtitle">Please don't unfocus, close, or edit this page</div></div></div></div><div id="lection-tab-warning" style="display: none;"><div class="lection-tab-warning-content"><div class="lection-tab-warning-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div><span class="lection-tab-warning-text">DO NOT SWITCH TABS DURING LECTION SCRAPE</span></div></div><div id="lection-agent-glow" aria-hidden="true"></div></body></html>
